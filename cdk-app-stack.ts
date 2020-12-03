@@ -9,16 +9,17 @@ export class CdkAppStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // const containerImage = ecr.Repository.fromRepositoryName(this, "MyJDPRepo", "test-node-app");
+    // Create a Docker image and upload it to the Amazon Elastic Container Registry (ECR)
     const dockerImage = new ecr_assets.DockerImageAsset(this, "MyJDPDockerImage", {
       directory: "/home/ec2-user/environment/node-app"
     });
     
-    // The code that defines your stack goes here
+    // Create a new VPC and NAT Gateway
     const vpc = new ec2.Vpc(this, "MyJDPVpc", {
       maxAzs: 3 // Default is all AZs in region
     });
 
+    // Create a new Amazon Elastic Container Service (ECS) cluster
     const cluster = new ecs.Cluster(this, "MyJDPCluster", {
       vpc: vpc
     });
