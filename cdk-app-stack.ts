@@ -30,7 +30,6 @@ export class CdkAppStack extends cdk.Stack {
       cpu: 512, // Default is 256
       desiredCount: 2, // Default is 1
       taskImageOptions: {
-        // image: ecs.ContainerImage.fromEcrRepository(containerImage),
         image: ecs.ContainerImage.fromDockerImageAsset(dockerImage),
         containerPort: 8080
       },
