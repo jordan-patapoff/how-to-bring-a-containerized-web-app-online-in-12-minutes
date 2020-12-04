@@ -31,7 +31,6 @@ export class CdkAppStack extends cdk.Stack {
     const dbinstance = new rds.DatabaseInstance(this, 'MyJDPRDSInstance', {
       engine: rds.DatabaseInstanceEngine.POSTGRES,
       instanceType: ec2.InstanceType.of(ec2.InstanceClass.M5, ec2.InstanceSize.LARGE),
-      masterUsername: 'syscdk',
       vpc,
       maxAllocatedStorage: 200,
     });
