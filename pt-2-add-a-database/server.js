@@ -12,7 +12,7 @@ const HOST = '0.0.0.0';
 const app = express();
 app.get('/', (req, res) => {
     var secretsmanager = new AWS.SecretsManager();
-    secretsmanager.getSecretValue({ SecretId: 'UPDATE-ME-GET-VALUE-FROM-WEB-CONSOLE' }, function(err, data) {
+    secretsmanager.getSecretValue({ SecretId: 'UPDATE-ME-GET-VALUE-FROM-SECRETS-MANAGER-WEB-CONSOLE' }, function(err, data) {
       if (err) {
         res.send('Unable to get secret');
       }
