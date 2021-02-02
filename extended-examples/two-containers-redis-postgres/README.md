@@ -20,7 +20,9 @@ This proof of concept deploys two different containers (API and Web) in an ECS F
 
 
 #### Instructions:
-* Drop in the CDK code, run `cdk deploy`
+* Drop in the CDK code
+* `npm install @aws-cdk/core @aws-cdk/aws-ec2 @aws-cdk/aws-ecs @aws-cdk/aws-ecr @aws-cdk/aws-ecr-assets @aws-cdk/aws-ecs-patterns @aws-cdk/aws-elasticloadbalancingv2 @aws-cdk/aws-elasticache @aws-cdk/aws-rds @aws-cdk/aws-iam`
+* Run `cdk deploy`
 * After command completes, update the `SecretId` parameter in the API's server.js and the `host` parameter in the Web's server.js
 * Run `cdk deploy` again
 * Test demo
