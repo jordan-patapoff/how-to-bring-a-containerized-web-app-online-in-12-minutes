@@ -6,7 +6,7 @@ This proof of concept deploys two different containers (API and Web) in an ECS F
 * GET /api/random-number
   * returns random number between 0 and 100 (inclusive of both 0 and 100)
 * GET /api/postgres-select-version
-  * NOTE: you will need to update the `SecretId` parameter by retrieving the "Secret name" from [AWS Secrets Manaer](https://console.aws.amazon.com/secretsmanager/home) after running `cdk deploy` for the first time
+  * NOTE: you will need to update the `SecretId` parameter by retrieving the "Secret name" from [AWS Secrets Manager](https://console.aws.amazon.com/secretsmanager/home) after running `cdk deploy` for the first time
   * gets DB conenction string, username, password, etc from AWS Secrets Manager, connects to the Postgres instance, and runs `SELECT version();`
 
 #### Web resources:
@@ -14,7 +14,7 @@ This proof of concept deploys two different containers (API and Web) in an ECS F
   * returns status code 200 with text "Web app"
 * GET /redis-server-info
   * NOTE: you will need to update the `host` parameter by retrieving the "Primary Endpoint" from [Amazon ElastiCache](https://console.aws.amazon.com/elasticache/home) after running `cdk deploy` for the first time
-  * connects to Redis and returns [client.server_info](https://www.npmjs.com/package/redis#clientserver_info)
+  * connects to Redis cluster and returns [client.server_info](https://www.npmjs.com/package/redis#clientserver_info)
 * GET /random-number-api-service-call
   * makes an HTTP request to the API running in the same ECS Task localhost:8888/api/random-number and returns the random number
 
