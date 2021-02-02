@@ -24,3 +24,12 @@ This proof of concept deploys two different containers (API and Web) in an ECS F
 * After command completes, update the `SecretId` parameter in the API's server.js and the `host` parameter in the Web's server.js
 * Run `cdk deploy` again
 * Test demo
+
+![image](two-containers-redis-postgres.jpg)
+
+### Considerations for this solution:
+* The two containers (API and Web) are deployed to the same ECS Task:
+  * enables cross-service calls over localhost
+  * API and Web must scale together 1:1
+* The `ApplicationMultipleTargetGroupsFargateService` construct allows you to set `pathPattern` for each Target Group, enabling path-based routing to the API container (ex `/api/*`)
+  
