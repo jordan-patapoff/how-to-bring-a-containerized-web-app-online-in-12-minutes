@@ -16,7 +16,7 @@ This proof of concept deploys two different containers (API and Web) in an ECS F
   * NOTE: you will need to update the `host` parameter by retrieving the "Primary Endpoint" from [Amazon ElastiCache](https://console.aws.amazon.com/elasticache/home) after running `cdk deploy` for the first time
   * connects to Redis and returns [client.server_info](https://www.npmjs.com/package/redis#clientserver_info)
 * GET /random-number-api-service-call
-  * direct call to the API running in the same ECS task localhost:8888/api/random-number and returns the random number
+  * makes an HTTP request to the API running in the same ECS Task localhost:8888/api/random-number and returns the random number
 
 
 #### Instructions:
