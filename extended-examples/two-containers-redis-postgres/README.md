@@ -8,6 +8,7 @@ This proof of concept deploys two different containers (API and Web) in an ECS F
 * GET /api/postgres-select-version
   * NOTE: you will need to update the `SecretId` parameter by retrieving the "Secret name" from [AWS Secrets Manager](https://console.aws.amazon.com/secretsmanager/home) after running `cdk deploy` for the first time
   * gets DB conenction string, username, password, etc from AWS Secrets Manager, connects to the Postgres instance, and runs `SELECT version();`
+* NOTE: All paths of API resources are prefixed with `/api`, which is configured at the Application Load Balancer level. Requests that match `/api/*` are routed to the API container(s) and all other requests are routed to the Web container(s). See the [targetGroups](https://github.com/jordan-patapoff/how-to-bring-a-containerized-web-app-online-in-12-minutes/blob/master/extended-examples/two-containers-redis-postgres/cdk-app-stack.ts#L55) configuration of the `ApplicationMultipleTargetGroupsFargateService` for more detail.
 
 #### Web resources:
 * GET /
