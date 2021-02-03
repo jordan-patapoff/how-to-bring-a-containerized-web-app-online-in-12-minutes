@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Specify the desired volume size in GiB as a command-line argument. If not specified, default to 20 GiB.
+# Specify the desired volume size in GiB as a command line argument. If not specified, default to 20 GiB.
 SIZE=${1:-20}
 
 # Get the ID of the environment host Amazon EC2 instance.
-INSTANCEID=$(curl http://169.254.169.254/latest/meta-data//instance-id)
+INSTANCEID=$(curl http://169.254.169.254/latest/meta-data/instance-id)
 
 # Get the ID of the Amazon EBS volume associated with the instance.
 VOLUMEID=$(aws ec2 describe-instances \
@@ -25,18 +25,35 @@ while [ \
 sleep 1
 done
 
+#Check if we're on an NVMe filesystem
 if [ $(readlink -f /dev/xvda) = "/dev/xvda" ]
 then
   # Rewrite the partition table so that the partition takes up all the space that it can.
   sudo growpart /dev/xvda 1
- 
+
   # Expand the size of the file system.
-  sudo resize2fs /dev/xvda1
+  # Check if we are on AL2
+  STR=$(cat /etc/os-release)
+  SUB="VERSION_ID=\"2\""
+  if [[ "$STR" == *"$SUB"* ]]
+  then
+    sudo xfs_growfs -d /
+  else
+    sudo resize2fs /dev/xvda1
+  fi
 
 else
   # Rewrite the partition table so that the partition takes up all the space that it can.
   sudo growpart /dev/nvme0n1 1
 
   # Expand the size of the file system.
-  sudo resize2fs /dev/nvme0n1p1
+  # Check if we're on AL2
+  STR=$(cat /etc/os-release)
+  SUB="VERSION_ID=\"2\""
+  if [[ "$STR" == *"$SUB"* ]]
+  then
+    sudo xfs_growfs -d /
+  else
+    sudo resize2fs /dev/nvme0n1p1
+  fi
 fi
