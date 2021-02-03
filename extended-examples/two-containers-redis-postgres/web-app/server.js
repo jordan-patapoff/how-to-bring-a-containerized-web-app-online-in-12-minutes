@@ -7,21 +7,26 @@ const redis = require('redis');
 const PORT = 8080;
 const HOST = '0.0.0.0';
 
+const client = redis.createClient({
+  host: "UPDATE_ME_AFTER_FIRST_CDK_DEPLOY" // UPDATE ME AFTER FIRST `cdk deploy`
+});
+client.on("error", function(error) {
+  console.log("redis client error: " + error);
+});
+client.on("ready", function() {
+  console.log("redis client ready");
+});
+
 const app = express();
 app.get('/', (req, res) => {
   res.send('Web app');
 });
 
 app.get('/redis-server-info', (req, res) => {
-  const client = redis.createClient({
-    host: "UPDATE_ME_AFTER_FIRST_CDK_DEPLOY" // UPDATE ME AFTER FIRST `cdk deploy`
-  });
-  client.on("error", function(error) {
-    res.send(error);
-  });
-  client.on("ready", function() {
-    res.send(client.server_info);
-  });
+  if(!client) {
+    res.send('unable to create redis client');
+  }
+  res.send(client.server_info);
 });
 
 app.get('/random-number-api-service-call', (req, res) => {
