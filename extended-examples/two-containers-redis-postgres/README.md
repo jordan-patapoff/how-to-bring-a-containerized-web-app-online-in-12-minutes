@@ -22,7 +22,7 @@ This proof of concept deploys two different containers (API and Web) in an ECS F
 
 #### Instructions:
 1) From the root-level [README](https://github.com/jordan-patapoff/how-to-bring-a-containerized-web-app-online-in-12-minutes/blob/master/README.md), complete steps 1-3 and 5-10
-2) Drag & drop the `api-app` and `web-app` folders into the Cloud9 file explorer
+2) Drag & drop the `api-app` and `web-app` folders **from this folder** into the Cloud9 file explorer
 3) In Cloud9 file browser, expand `cdk-app` then expend `lib`. Drag & drop the downloaded `cdk-app-stack.ts` file **from this folder** into the `lib` folder, overwriting the existing file.
 4) `npm install @aws-cdk/core @aws-cdk/aws-ec2 @aws-cdk/aws-ecs @aws-cdk/aws-ecr @aws-cdk/aws-ecr-assets @aws-cdk/aws-ecs-patterns @aws-cdk/aws-elasticloadbalancingv2 @aws-cdk/aws-elasticache @aws-cdk/aws-rds @aws-cdk/aws-iam`
 5) Run `cdk deploy`
