@@ -7,7 +7,7 @@
 
 
 OTHER SETUP NOTES:
-
+```
 npm update -g
 
 export CDK_NEW_BOOTSTRAP=1
@@ -37,3 +37,4 @@ git commit -m "initial commit"
 git push origin master
 
 cdk deploy
+```
