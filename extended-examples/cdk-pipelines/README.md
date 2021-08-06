@@ -1,5 +1,6 @@
 **TODO**
 * bin/cdk-app.ts set account ID, region
+* cdk-app-stack.ts update INSERT_ACCOUNT_ID and INSERT_REGION
 * update instructions to npm install @aws-cdk/core @aws-cdk/aws-ec2 @aws-cdk/aws-ecs @aws-cdk/aws-ecr @aws-cdk/aws-ecr-assets @aws-cdk/aws-ecs-patterns **--save**
 * update dockerfile to FROM public.ecr.aws/bitnami/node:12 due to docker.com rate limiting
 * nest web-app-node folder INSIDE cdk-app since `cdk init` will init a git repo
