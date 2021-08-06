@@ -12,16 +12,16 @@ npm update -g
 
 export CDK_NEW_BOOTSTRAP=1
 
-cdk bootstrap aws://ACCOUNT_ID/us-west-2 \
-    --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess \
-    aws://ACCOUNT_ID/us-west-2
+cdk bootstrap aws://ACCOUNT_ID/us-west-2 --cloudformation-execution-policies arn:aws:iam::aws:policy/AdministratorAccess aws://ACCOUNT_ID/us-west-2
 
 mkdir cdk-app && cd cdk-app
 
 cdk init --language typescript
 
 cd ~/environment/bash-scripts
+
 chmod +x  resize-cloud9.sh
+
 ./resize-cloud9.sh 100
 
 npm install @aws-cdk/core @aws-cdk/aws-ec2 @aws-cdk/aws-ecs @aws-cdk/aws-ecr @aws-cdk/aws-ecr-assets @aws-cdk/aws-ecs-patterns
