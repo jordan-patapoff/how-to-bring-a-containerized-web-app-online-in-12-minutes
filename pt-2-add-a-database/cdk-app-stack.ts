@@ -8,14 +8,13 @@ import * as ecs_patterns from 'aws-cdk-lib/aws-ecs-patterns';
 import * as rds from 'aws-cdk-lib/aws-rds';
 import * as iam from 'aws-cdk-lib/aws-iam';
 
-
 export class CdkAppStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
     // Create a Docker image and upload it to the Amazon Elastic Container Registry (ECR)
     const dockerImage = new ecr_assets.DockerImageAsset(this, "MyJDPDockerImage", {
-      directory: "/home/ec2-user/environment/node-app"
+      directory: "/home/ec2-user/environment/web-app-node"
     });
     
     // Create a new VPC and NAT Gateway
