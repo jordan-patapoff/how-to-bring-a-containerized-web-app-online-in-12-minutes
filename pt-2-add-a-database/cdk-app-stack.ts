@@ -1,4 +1,4 @@
-import { Stack, StackProps } from 'aws-cdk-lib';
+import { Stack, StackProps, CfnOutput, Duration } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as ecs from 'aws-cdk-lib/aws-ecs';
@@ -59,5 +59,9 @@ export class CdkAppStack extends Stack {
     
     // Allow the application running on Fargate to connect to the database on port 5432
     dbinstance.connections.allowFrom(fargateService.service, ec2.Port.tcp(5432), 'MyJDPTaskToDBInboundRule');
+    
+    // Output the SecretId used to configure RDS. Used in the application code to query 
+    // SecretsManager to get host, user, password, etc to connect to DB instance
+    new CfnOutput(this, 'RDSSecretsManagerSecretId', { value: dbinstance.secret!.secretArn });
   }
 }
