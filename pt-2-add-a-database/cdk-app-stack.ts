@@ -1,15 +1,16 @@
-import * as cdk from "@aws-cdk/core";
-import * as ec2 from "@aws-cdk/aws-ec2";
-import * as ecs from "@aws-cdk/aws-ecs";
-import * as ecr from "@aws-cdk/aws-ecr";
-import * as ecr_assets from "@aws-cdk/aws-ecr-assets";
-import * as ecs_patterns from "@aws-cdk/aws-ecs-patterns";
-import * as rds from '@aws-cdk/aws-rds';
-import * as iam from '@aws-cdk/aws-iam';
+import { Stack, StackProps } from 'aws-cdk-lib';
+import { Construct } from 'constructs';
+import * as ec2 from 'aws-cdk-lib/aws-ec2';
+import * as ecs from 'aws-cdk-lib/aws-ecs';
+import * as ecr from 'aws-cdk-lib/aws-ecr';
+import * as ecr_assets from 'aws-cdk-lib/aws-ecr-assets';
+import * as ecs_patterns from 'aws-cdk-lib/aws-ecs-patterns';
+import * as rds from 'aws-cdk-lib/aws-rds';
+import * as iam from 'aws-cdk-lib/aws-iam';
 
 
-export class CdkAppStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+export class CdkAppStack extends Stack {
+  constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
     // Create a Docker image and upload it to the Amazon Elastic Container Registry (ECR)
