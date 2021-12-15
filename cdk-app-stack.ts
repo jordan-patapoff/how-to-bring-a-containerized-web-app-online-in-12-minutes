@@ -12,7 +12,7 @@ export class CdkAppStack extends Stack {
 
     // Create a Docker image and upload it to the Amazon Elastic Container Registry (ECR)
     const dockerImage = new ecr_assets.DockerImageAsset(this, "MyJDPDockerImage", {
-      directory: "/home/ec2-user/environment/web-app-flask"
+      directory: "/home/ec2-user/environment/web-app-node"
     });
     
     // Create a new VPC and NAT Gateway
