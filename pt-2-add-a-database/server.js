@@ -2,7 +2,6 @@
 const express = require('express');
 const AWS = require('aws-sdk');
 const pg = require('pg');
-AWS.config.update({region:'us-west-2'});
 
 // Constants
 const PORT = 8080;
@@ -12,7 +11,7 @@ const HOST = '0.0.0.0';
 const app = express();
 app.get('/', (req, res) => {
     var secretsmanager = new AWS.SecretsManager();
-    secretsmanager.getSecretValue({ SecretId: 'UPDATE-ME-GET-VALUE-FROM-SECRETS-MANAGER-WEB-CONSOLE' }, function(err, data) {
+    secretsmanager.getSecretValue({ SecretId: 'replace-with-CfnOutput-RDSSecretsManagerSecretId-value' }, function(err, data) {
       if (err) {
         res.send('Unable to get secret');
       }
