@@ -1,17 +1,18 @@
-import * as cdk from "@aws-cdk/core";
-import * as ec2 from "@aws-cdk/aws-ec2";
-import * as ecs from "@aws-cdk/aws-ecs";
-import * as ecr from "@aws-cdk/aws-ecr";
-import * as ecr_assets from "@aws-cdk/aws-ecr-assets";
-import * as ecs_patterns from "@aws-cdk/aws-ecs-patterns";
+import { Stack, StackProps } from 'aws-cdk-lib';
+import { Construct } from 'constructs';
+import * as ec2 from 'aws-cdk-lib/aws-ec2';
+import * as ecs from 'aws-cdk-lib/aws-ecs';
+import * as ecr from 'aws-cdk-lib/aws-ecr';
+import * as ecr_assets from 'aws-cdk-lib/aws-ecr-assets';
+import * as ecs_patterns from 'aws-cdk-lib/aws-ecs-patterns';
 
-export class CdkAppStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+export class CdkAppStack extends Stack {
+  constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
     // Create a Docker image and upload it to the Amazon Elastic Container Registry (ECR)
     const dockerImage = new ecr_assets.DockerImageAsset(this, "MyJDPDockerImage", {
-      directory: "/home/ec2-user/environment/node-app"
+      directory: "/home/ec2-user/environment/web-app-flask"
     });
     
     // Create a new VPC and NAT Gateway
