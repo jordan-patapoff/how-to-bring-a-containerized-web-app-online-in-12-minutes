@@ -1,15 +1,16 @@
-import * as cdk from "@aws-cdk/core";
-import * as ec2 from "@aws-cdk/aws-ec2";
-import * as ecs from "@aws-cdk/aws-ecs";
-import * as ecr from "@aws-cdk/aws-ecr";
-import * as ecr_assets from "@aws-cdk/aws-ecr-assets";
-import * as ecs_patterns from "@aws-cdk/aws-ecs-patterns";
-import * as codecommit from '@aws-cdk/aws-codecommit';
-import * as pipelines from '@aws-cdk/pipelines';
-import * as iam from '@aws-cdk/aws-iam';
+import { Stack, StackProps, CfnOutput, Duration, Stage, StageProps } from 'aws-cdk-lib';
+import { Construct } from 'constructs';
+import * as ec2 from 'aws-cdk-lib/aws-ec2';
+import * as ecs from 'aws-cdk-lib/aws-ecs';
+import * as ecr from 'aws-cdk-lib/aws-ecr';
+import * as ecr_assets from 'aws-cdk-lib/aws-ecr-assets';
+import * as ecs_patterns from 'aws-cdk-lib/aws-ecs-patterns';
+import * as codecommit from 'aws-cdk-lib/aws-codecommit';
+import * as pipelines from 'aws-cdk-lib/pipelines';
+import * as iam from 'aws-cdk-lib/aws-iam';
 
-class JDPStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+class JDPStack extends Stack {
+  constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
     // Create a Docker image and upload it to the Amazon Elastic Container Registry (ECR)
@@ -43,16 +44,16 @@ class JDPStack extends cdk.Stack {
   }
 }
 
-class MyApplication extends cdk.Stage {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StageProps) {
+class MyJDPApplication extends Stage {
+  constructor(scope: Construct, id: string, props?: StageProps) {
     super(scope, id, props);
     
-    new JDPStack(this, 'JDPSTack');
+    new JDPStack(this, 'JDPStack');
   }
 }
 
-export class CdkAppStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+export class CdkAppStack extends Stack {
+  constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
     
     const repository = new codecommit.Repository(this, 'MyJDPRepository', {
@@ -68,17 +69,9 @@ export class CdkAppStack extends cdk.Stack {
           'npm run build',
           'npx cdk synth',
         ]
-        
       }),
     });
     
-    
-    pipeline.addStage(new MyApplication(this, 'Prod', {
-      env: {
-        account: 'INSERT_ACCOUNT_ID',
-        region: 'INSERT_REGION',
-      }
-    }));
-    
+    pipeline.addStage(new MyJDPApplication(this, 'Prod'));
   }
 }
