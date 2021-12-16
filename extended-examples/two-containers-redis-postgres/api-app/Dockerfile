@@ -1,5 +1,5 @@
 # set base image
-FROM node:12
+FROM public.ecr.aws/docker/library/node:12
 
 # set the working directory in the container
 WORKDIR /usr/src/app
