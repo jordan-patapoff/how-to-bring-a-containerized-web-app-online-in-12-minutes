@@ -1,6 +1,6 @@
 # Troubleshooting Tips
 
-## It takes too long to `cdk deploy` changes
+## It takes too long to deploy changes
 Add the following code:
 ```
 fargateService.targetGroup.setAttribute('deregistration_delay.timeout_seconds', '10');
