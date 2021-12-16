@@ -1,6 +1,6 @@
 # Troubleshooting Tips
 
-## It takes too long to deploy changes
+## It takes too long to deploy changes to application code
 Add the following code:
 ```
 fargateService.targetGroup.setAttribute('deregistration_delay.timeout_seconds', '10');
